@@ -28,18 +28,18 @@ async def start_command_handler(client: Client, message: Message):
 
 # Command handler for /list command
 @app.on_message(filters.command("list"))
-def list_files(client: Client, message: Message):
+async def list_files(client: Client, message: Message):
     files = get_files_list()  # Get the list of files
     if files:
         file_list = "\n".join([f"{i+1}. {file}" for i, file in enumerate(files)])
-        message.reply_text(f"Directory: {current_directory}\n\nAvailable files:\n{file_list}\n\nSend /send <file_number> to send a file.")
+        await message.reply_text(f"Directory: {current_directory}\n\nAvailable files:\n{file_list}\n\nSend /send <file_number> to send a file.")
     else:
-        message.reply_text(f"No files found in directory: {current_directory}")
+        await message.reply_text(f"No files found in directory: {current_directory}")
 
 
 # Command handler for /send command with file number parameter
 @app.on_message(filters.command("send"))# & filters.regex(r'^\d+$'))
-def send_file_by_number(client: Client, message: Message):
+async def send_file_by_number(client: Client, message: Message):
     print("in send")
     file_number = int(message.text.split()[1]) - 1  # Extract the file number (convert to zero-index)
     files = get_files_list()  # Get the list of files
@@ -49,7 +49,7 @@ def send_file_by_number(client: Client, message: Message):
         print(file_path)
         send_file(client, message, file_path)
     else:
-        message.reply_text("Invalid file number. Send /list to see available files.")
+        await message.reply_text("Invalid file number. Send /list to see available files.")
 
 
 # Function to get a list of files in the current directory
@@ -62,13 +62,13 @@ def get_files_list():
 
 
 # Function to send a file
-def send_file(client: Client, message: Message, file_path: str):
+async def send_file(client: Client, message: Message, file_path: str):
     try:
         # Send the document back to the user who initiated the command
-        client.send_document(chat_id=-1002183288516, document=os.path.join(current_directory, file_path))
+        await client.send_document(chat_id=-1002183288516, document=os.path.join(current_directory, file_path))
         message.reply_text(f"File '{file_path}' sent successfully!")
     except Exception as e:
-        message.reply_text(f"Error sending file: {e}")
+        await message.reply_text(f"Error sending file: {e}")
 
 
 # Run the bot
