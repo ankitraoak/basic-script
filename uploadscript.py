@@ -5,7 +5,7 @@ import os
 # Replace these with your actual API credentials and bot token
 api_id = 26074242
 api_hash = 'e68320b3f73cbc927b97be3cf9192fdd'
-bot_token = '7292971391:AAE6NZDS8jaAodLAU-F__LhkmwMqY-gAqsw'
+bot_token = '7431350058:AAHsOlY9p383D3XysLE2D_SsZiu0h2ZLTvE'
 
 # Initialize the bot client
 app = Client("my_bot", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
