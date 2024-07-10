@@ -1,8 +1,5 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
-import pyrogram.utils
-
-pyrogram.utils.MIN_CHANNEL_ID = -1002183288516
 import os
 
 # Replace these with your actual API credentials and bot token
@@ -68,7 +65,7 @@ def get_files_list():
 async def send_file(client: Client, message: Message, file_path: str):
     try:
         # Send the document back to the user who initiated the command
-        await client.send_document(chat_id=-1002183288516, document=os.path.join(current_directory, file_path))
+        await client.send_document(chat_id=-1002003609759, document=os.path.join(current_directory, file_path))
         await message.reply_text(f"File '{file_path}' sent successfully!")
     except Exception as e:
         await message.reply_text(f"Error sending file: {e}")
