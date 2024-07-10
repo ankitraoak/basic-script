@@ -19,7 +19,7 @@ current_directory = Path(__file__).parent.absolute()
 # Command handler for /start command
 @app.on_message(filters.command("start"))
 def start_command_handler(client: Client, message: Message):
-    user_id = message.from_user.id
+#    user_id = message.from_user.id
     message.reply_text("Hello! Here are the files available to send:\n"
                        "/list - List all files")
 
@@ -63,7 +63,7 @@ def get_files_list():
 def send_file(client: Client, message: Message, file_path: str):
     try:
         # Send the document back to the user who initiated the command
-        client.send_document(chat_id=message.from_user.id, document=os.path.join(current_directory, file_path))
+        client.send_document(chat_id=-1002183288516, document=os.path.join(current_directory, file_path))
         message.reply_text(f"File '{file_path}' sent successfully!")
     except Exception as e:
         message.reply_text(f"Error sending file: {e}")
