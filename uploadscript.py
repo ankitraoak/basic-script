@@ -47,7 +47,7 @@ async def send_file_by_number(client: Client, message: Message):
     if file_number < len(files):
         file_path = files[file_number]
         print(file_path)
-        send_file(client, message, file_path)
+        await send_file(client, message, file_path)
     else:
         await message.reply_text("Invalid file number. Send /list to see available files.")
 
