@@ -1,5 +1,8 @@
 from pyrogram import Client, filters
 from pyrogram.types import Message
+import pyrogram.utils
+
+pyrogram.utils.MIN_CHANNEL_ID = 1002183288516
 import os
 
 # Replace these with your actual API credentials and bot token
