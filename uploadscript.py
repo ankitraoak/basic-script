@@ -18,10 +18,12 @@ current_directory = Path(__file__).parent.absolute()
 
 # Command handler for /start command
 @app.on_message(filters.command("start"))
-def start_command_handler(client: Client, message: Message):
-#    user_id = message.from_user.id
-    message.reply_text("Hello! Here are the files available to send:\n"
-                       "/list - List all files")
+async def start_command_handler(client: Client, message: Message):
+    await message.reply_text("Hello! Here are the files available to send:\n"
+                             "/list - List all files")
+
+    # await message.reply_text("Hello! Here are the files available to send:\n"
+    #                    "/list - List all files")
 
 
 # Command handler for /list command
