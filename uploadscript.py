@@ -65,7 +65,11 @@ def get_files_list():
 async def send_file(client: Client, message: Message, file_path: str):
     try:
         # Send the document back to the user who initiated the command
-        await client.send_document(chat_id=-1002003609759, document=os.path.join(current_directory, file_path))
+        await client.send_document(
+    chat_id=-1002003609759, 
+    document=os.path.join(current_directory, file_path),
+    caption=os.path.basename(file_path)  # This sets the caption to the file name
+)
         await message.reply_text(f"File '{file_path}' sent successfully!")
     except Exception as e:
         await message.reply_text(f"Error sending file: {e}")
