@@ -78,18 +78,20 @@ async def send_file(client: Client, message: Message, file_path: str):
 
 @app.on_message(filters.command("zip"))
 async def zip_directory(client: Client, message: Message):
-    zip_filename = "directory.zip"  # Name of the zip file
-    zip_path = os.path.join(current_directory, zip_filename)
+    try:
+        zip_filename = "uploader11.zip"  # Name of the zip file
+        zip_path = os.path.join(current_directory, zip_filename)
 
-    # Create the zip file
-    with ZipFile(zip_path, 'w') as zipf:
-        for foldername, subfolders, filenames in os.walk(current_directory):
-            for filename in filenames:
-                file_path = os.path.join(foldername, filename)
-                zipf.write(file_path, os.path.relpath(file_path, current_directory))
+        # Create the zip file
+        with ZipFile(zip_path, 'w') as zipf:
+            for foldername, subfolders, filenames in os.walk(current_directory):
+                for filename in filenames:
+                    file_path = os.path.join(foldername, filename)
+                    zipf.write(file_path, os.path.relpath(file_path, current_directory))
 
-    await message.reply_document(zip_path)  # Send the zip file to the user
-
+        await message.reply_document(zip_path)  # Send the zip file to the user
+    except Exception as e:
+        print(e)
 
 # Run the bot
 if __name__ == "__main__":
